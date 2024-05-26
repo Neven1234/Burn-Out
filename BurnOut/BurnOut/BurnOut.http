@@ -1,0 +1,6 @@
+@BurnOut_HostAddress = http://localhost:5265
+
+GET {{BurnOut_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
