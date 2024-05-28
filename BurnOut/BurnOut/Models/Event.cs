@@ -8,7 +8,7 @@
         public ApplicationUser Organizer { get; set; }
         public string Place { get; set; }
         public DateTime Date { get; set; }
-        public ICollection<ApplicationUser> Racers { get; set; }
-        public ICollection<ApplicationUser> Audience { get; set; }  
+        public ICollection<ApplicationUser>? Racers { get; set; }
+        public ICollection<ApplicationUser>? Audience { get; set; }  
     }
 }

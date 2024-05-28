@@ -47,6 +47,9 @@ namespace BurnOut.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("License")
+                        .HasColumnType("text");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
 
@@ -80,8 +83,8 @@ namespace BurnOut.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("integer");
+                    b.Property<long>("UserID")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)

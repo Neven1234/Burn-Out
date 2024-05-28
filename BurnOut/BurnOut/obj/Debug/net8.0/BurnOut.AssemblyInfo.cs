@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BurnOut")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+776772742eb717caf22f5b982b09f2da9514fb5a")]
 [assembly: System.Reflection.AssemblyProductAttribute("BurnOut")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BurnOut")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
