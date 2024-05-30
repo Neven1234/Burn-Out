@@ -7,6 +7,8 @@
         public string OrganizerId { get; set; }
         public ApplicationUser Organizer { get; set; }
         public string Place { get; set; }
+        public string PhotoUrl { get; set; }
+        public string? PublicId { get; set; }
         public DateTime Date { get; set; }
         public ICollection<ApplicationUser>? Racers { get; set; }
         public ICollection<ApplicationUser>? Audience { get; set; }  

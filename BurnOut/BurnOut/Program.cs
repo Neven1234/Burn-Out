@@ -1,4 +1,5 @@
 using BurnOut.Data;
+using BurnOut.Helper;
 using BurnOut.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +54,17 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseNpgsql(builder.Configuration.GetConnectionString("connSrting"));
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        name: "AllowOrigin",
+          builder => {
+              builder.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader();
+          });
+});
+
 //dependency injection 
 builder.Services.AddScoped<IAuth,AuthService>();
 builder.Services.AddScoped<IEvent, EventService>();
@@ -86,11 +99,14 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+//Clodinary settings
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(EventService).Assembly);
 
 var app = builder.Build();
-
+app.UseCors("AllowOrigin");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

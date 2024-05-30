@@ -121,8 +121,15 @@ namespace BurnOut.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("PhotoUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Place")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PublicId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
