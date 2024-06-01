@@ -35,5 +35,11 @@ namespace BurnOut.Data
             return null;
 
         }
+
+        public async Task<Event> GetEventByOrganizerEmail(string organizerEmail)
+        {
+           var Event= await _dbContext.Events.FirstOrDefaultAsync(e=>e.Organizer.Email==organizerEmail);
+            return Event;
+        }
     }
 }

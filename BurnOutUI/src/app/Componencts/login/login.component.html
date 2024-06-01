@@ -18,7 +18,7 @@
        <div class="invalid-feedback" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
         Password is required</div>
     </div>
-    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Sign in</button>
+    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4" (click)=" Login()" >Sign in</button>
     <div class="text-center">
       <p>Not a member? <a href="Register">Register</a></p>
     </div>

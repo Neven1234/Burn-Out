@@ -1,0 +1,25 @@
+<div class="payment-form-container">
+  <h2>Payment Form</h2>
+  <form id="payment-form" (submit)="processPayment(); $event.preventDefault();">
+    <div class="form-group">
+      <label for="card-number-element">Card Number</label>
+      <div id="card-number-element" class="card-element"></div>
+    </div>
+    <div class="form-group">
+      <label for="card-expiry-element">Expiration Date</label>
+      <div id="card-expiry-element" class="card-element"></div>
+    </div>
+    <div class="form-group">
+      <label for="card-cvc-element">CVC</label>
+      <div id="card-cvc-element" class="card-element"></div>
+    </div>
+    <div class="form-group">
+      <label for="zip-code">ZIP Code</label>
+      <input type="text" id="zip-code" [(ngModel)]="zipCode" name="zipCode" class="form-control" />
+    </div>
+    <button type="submit" [disabled]="isProcessing" class="pay-button">
+      {{ isProcessing ? 'Processing...' : 'Pay' }}
+    </button>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </form>
+</div>

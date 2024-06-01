@@ -47,6 +47,10 @@ namespace BurnOut.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("License")
                         .HasColumnType("text");
 
@@ -79,10 +83,6 @@ namespace BurnOut.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<long>("UserID")
                         .HasColumnType("bigint");
 
@@ -110,8 +110,15 @@ namespace BurnOut.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<float>("AudiencePrice")
+                        .HasColumnType("real");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("EventName")
                         .IsRequired()
@@ -131,6 +138,9 @@ namespace BurnOut.Migrations
 
                     b.Property<string>("PublicId")
                         .HasColumnType("text");
+
+                    b.Property<float>("RacerPrice")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

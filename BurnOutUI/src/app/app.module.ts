@@ -11,9 +11,13 @@ import { AddEventComponent } from './Componencts/add-event/add-event.component';
 import { NavComponent } from './Componencts/nav/nav.component';
 import { EventCardComponent } from './Componencts/event-card/event-card.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthService } from './Services/auth.service';
+import { ErrorInspecter } from './ErrorHandel/ErrorIntercepter';
+import { PaymentComponent } from './Componencts/payment/payment.component';
 @NgModule({
   declarations: [
+
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -22,15 +26,23 @@ import { HttpClientModule } from '@angular/common/http';
     AddEventComponent,
     NavComponent,
     EventCardComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ErrorInspecter,
+        multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

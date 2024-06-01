@@ -66,8 +66,16 @@ builder.Services.AddCors(options =>
 });
 
 //dependency injection 
+
+
+
 builder.Services.AddScoped<IAuth,AuthService>();
 builder.Services.AddScoped<IEvent, EventService>();
+builder.Services.AddScoped<IPayment,PaymentService>();
+
+
+//Payment 
+
 
 
 //identity user

@@ -33,16 +33,57 @@
             <input style="margin-right: 3px;" type="radio" value="female" formControlName="gender">Female
           </label>
         </div>
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input type="text"  [ngClass]="{'is-invalid':registerForm.get('userID')?.errors && registerForm.get('userID')?.touched}"
+          class="form-control " 
+         formControlName="userID"
+          placeholder="Your ID" />
+        </div>
+        <div class="form-outline mb-4 form-group" >
+          <label class="control-label" style="margin-right:10px">You are A : </label>
+          <label class="radio-inline">
+            <input  style="margin-right: 3px;" type="radio" (change)=" CheckRacer($event)" value="Audience" formControlName="Role">Audience
+          </label>
+          <label class="radio-inline ml-10 form-group" style="margin-left: 10px;">
+            <input style="margin-right: 3px;" type="radio" (change)=" CheckRacer($event)" value="Racer" formControlName="Role">Racer
+          </label>
+          <label class="radio-inline ml-10 form-group" style="margin-left: 10px;">
+            <input style="margin-right: 3px;"  (change)=" CheckRacer($event)" type="radio" value="Organizer" formControlName="Role">Organizer
+          </label>
+        </div>
+        <div *ngIf="IsRacer">
+          <div data-mdb-input-init class="form-outline mb-4">
+            <input type="text"  [ngClass]="{'is-invalid':registerForm.get('carType')?.errors && registerForm.get('carType')?.touched}"
+            class="form-control " 
+           formControlName="carType"
+            placeholder="Car Type" />
+          </div>
+          <div data-mdb-input-init class="form-outline mb-4">
+            <input type="text"  [ngClass]="{'is-invalid':registerForm.get('License')?.errors && registerForm.get('License')?.touched}"
+            class="form-control " 
+           formControlName="License"
+            placeholder="License" />
+          </div>
+        </div>
         <div data-mdb-input-init class="form-outline mb-4 form-group">
           <input type="password" 
           [ngClass]="{'is-invalid':registerForm.get('password')?.errors && registerForm.get('password')?.touched}"
-           class="form-control" 
-           formControlName="password" placeholder="Password"  >
-           <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
-            Password is required</div>
-            <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched">
-             password should be at least 6 characters</div>
-             <label>passwords must contain an uppercase character[A-Z],<br> lowercase character[a-z], a digit[0,9],<br> and a non-alphanumeric character[#$].</label>
+          class="form-control" 
+          formControlName="password" placeholder="Password">
+        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
+          Password is required
+        </div>
+        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched">
+          Password should be at least 6 characters
+        </div>
+        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('passwordStrength') && registerForm.get('password')?.touched">
+          Password must contain an uppercase character, a lowercase character, a digit, and a special character
+        </div>
+        <label>
+          Passwords must contain an uppercase character[A-Z],<br>
+          lowercase character[a-z], a digit[0-9],<br>
+          and a non-alphanumeric character[!#$%^&*(),.?":|>].
+        </label>
         </div>
         <div data-mdb-input-init class="form-outline mb-4 form-group">
           <input type="password" 
@@ -61,7 +102,7 @@
         </div>
     
         <!-- Submit button -->
-        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-3">Sign in</button>
+        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-3" (click)="register()" >Sign in</button>
         <button type="cancel" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-3" style="margin-left: 250px;" (click)="Cancel()">Cancel</button>
       </form>
 </div>

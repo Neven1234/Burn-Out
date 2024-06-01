@@ -42,7 +42,7 @@ namespace BurnOut.Data
                 var token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
                 return token;
             }
-            return "Username Or Password are wrong";
+            return null;
         }
 
         public async Task<string> Register(RegisterDTO register)
@@ -56,9 +56,10 @@ namespace BurnOut.Data
             {
                 UserName = register.Username,
                 Email = register.Email,
+                PhoneNumber = register.PhoneNumber,
                 License = register.License,
                 CarType=register.CarType,
-                Type= register.Type,
+                Gender= register.Gender,
                 Age=register.Age,
                 UserID=register.UserID,
                 SecurityStamp = Guid.NewGuid().ToString(),

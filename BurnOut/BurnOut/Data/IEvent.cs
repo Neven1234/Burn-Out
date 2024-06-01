@@ -8,6 +8,6 @@ namespace BurnOut.Data
         Task<IEnumerable<Event>> GetAllEvents(Expression<Func<Event, bool>> filter = null);
         Task<Event> GetEvent(int id);
         Task CreateEvent(Event createdEvent);
-
+        Task <Event> GetEventByOrganizerEmail(string organizerEmail);
     }
 }

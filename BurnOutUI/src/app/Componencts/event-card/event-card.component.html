@@ -1,12 +1,22 @@
-<div class="card mb-4">
-    <div class="name">
-        <h1>{{event.eventName}}</h1>
+<div class="event-card">
+    <div class="event-card-header">
+        <h2>{{event.eventName}}</h2>
+        
     </div>
-    <div class="view overlay">
-        <img class="card-img-top" src="{{event.photoUrl}}" alt="user.knownAs">
+    <div class="event-image">
+        <img src="{{event.photoUrl}}" alt="{{event.eventName}}">
     </div>
-    <div class="card-body p-1">
+    <div class="event-description">
         <p>{{event.description}}</p>
-    <p class="card-text text-muted text-center"><button>Details</button></p>
+        <div class="organizer">
+            <span>Organized by:</span>
+            <p>event.organizer</p>
+        </div>
+    </div>
+    <div class="event-date">
+        <p>Date: {{event.date | date:'yyyy-MM-dd'}}</p>
+    </div>
+    <div class="event-actions">
+        <button class="btn btn-primary">Pay</button>
     </div>
 </div>

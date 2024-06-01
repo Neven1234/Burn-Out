@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Event } from '../../Models/Event';
+import { PaymentService } from '../../Services/payment.service';
+import { FawryPaymentRequest } from '../../Models/FawryPaymentRequest ';
 
 @Component({
   selector: 'app-event-card',
@@ -17,8 +19,10 @@ export class EventCardComponent implements OnInit {
     reciersCount: 0,
     audianceCount: 0
   }
+ 
   constructor(){}
   ngOnInit(): void {
     console.log(this.event.description)
   }
+ 
 }

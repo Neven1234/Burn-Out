@@ -21,9 +21,17 @@ namespace BurnOut.Controllers
             return Ok(await _auth.Register(registerDTO));
         }
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(string username,string password)
+        public async Task<IActionResult> Login(LogInDTO logInDTO)
         {
-            return Ok(await _auth.LogIn(username, password));
+            var Token = await _auth.LogIn(logInDTO.Username, logInDTO.Password);
+            if(Token == null)
+            {
+                return BadRequest("Username or password are wrong");
+            }
+            return Ok(new
+            {
+                token = Token
+            });
         }
     }
 }
