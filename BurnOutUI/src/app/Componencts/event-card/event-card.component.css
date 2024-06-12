@@ -1,45 +1,59 @@
 .event-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
     overflow: hidden;
     margin-bottom: 20px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .event-image {
-    height: 200px; /* Set a fixed height */
-    overflow: hidden; /* Hide overflowing content */
+    height: 200px;
+    overflow: hidden;
 }
 
 .event-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.event-card:hover .event-image img {
+    transform: scale(1.05);
 }
 
 .event-card-header {
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    background-color: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .event-card-header h2 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: #333;
+    font-weight: 600;
 }
 
 .event-date {
     margin-top: 5px;
-    margin-left: 10px;
-    font-size: 0.9rem;
-    color: #666;
+    padding: 0 15px;
+    font-size: 1rem;
+    color: #888;
 }
 
 .event-description {
     padding: 15px;
+    background-color: #fff;
+    color: #555;
 }
 
 .organizer {
@@ -48,23 +62,44 @@
 
 .organizer span {
     font-weight: bold;
+    color: #333;
+}
+
+.organizer p {
+    margin: 5px 0 0;
+    color: #666;
 }
 
 .event-actions {
     padding: 15px;
     text-align: center;
+    cursor: pointer;
+    color: #0056b3;
+}
+
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.action-buttons .btn {
+    flex: 1;
+    margin: 0 5px;
 }
 
 .btn {
     padding: 10px 20px;
-    background-color: #007bff;
+ 
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
 }

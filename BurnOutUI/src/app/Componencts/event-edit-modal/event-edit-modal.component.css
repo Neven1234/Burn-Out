@@ -1,0 +1,21 @@
+/* event-edit-modal.component.css */
+.modal {
+    display: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .modal.show {
+    display: block;
+    opacity: 1;
+  }
+  
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+    transition: transform 0.3s ease-out;
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+  

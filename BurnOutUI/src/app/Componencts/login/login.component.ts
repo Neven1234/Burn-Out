@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { loginUser } from '../../Models/LogInUser';
 import { AuthService } from '../../Services/auth.service';
 import { User } from '../../Models/user';
+import { AlertifyService } from '../../Services/alertify.service';
+import { Router } from '@angular/router';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +15,9 @@ import { User } from '../../Models/user';
 export class LoginComponent implements OnInit  {
 
   loginForm!: FormGroup;
-  constructor(private fb:FormBuilder,private auth:AuthService){}
+  loading:boolean =false;
+  constructor(private fb:FormBuilder,private auth:AuthService,private alerty:AlertifyService,
+    private router:Router, private app:AppComponent){}
   user:User={
     username: '',
     password: ''
@@ -21,7 +26,7 @@ export class LoginComponent implements OnInit  {
    this.createLoginForm()
   }
 
-    //register forem
+    //Login forem
     createLoginForm(){
       this.loginForm= this.fb.group({
         username:['',Validators.required],
@@ -33,12 +38,19 @@ export class LoginComponent implements OnInit  {
       if(this.loginForm.valid){
         this.user.username=this.loginForm.get('username')?.value
         this.user.password=this.loginForm.get('password')?.value
+        this.loading=true
         this.auth.LogIn(this.user).subscribe({
           next:(response)=>{
+            this.loading=false
             console.log('Loged in')
+            this.app.name=this.auth.decodedToken.name
+            this.alerty.success("Logged in sucessfully")
+            this.router.navigate([''])
           },
           error:(error)=>{
-            console.log(error)
+           
+            this.alerty.error('Username Or Password Are wrong')
+            this.loading=false
           }
         })
       }

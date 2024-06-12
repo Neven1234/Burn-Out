@@ -23,6 +23,9 @@ export class AuthService {
         if(user!= undefined){
           localStorage.setItem('token',user.token)
           this.decodedToken=this.jwtHelper.decodeToken(user.token)
+          localStorage.setItem('Role',this.decodedToken.Role)
+          localStorage.setItem('userId',this.decodedToken.userId)
+          localStorage.setItem('name',this.decodedToken.name)
           console.log(this.decodedToken.Role)
         }
       })
@@ -30,7 +33,8 @@ export class AuthService {
   }
 
   Register(regiserUser:RegisterUser){
-    return this.http.post(this.baseUrl+'api/Auth/Register',regiserUser,{responseType: 'text'})
+    
+    return this.http.post(this.baseUrl+'api/Auth/Register',regiserUser, {responseType: 'text'})
   }
   //// check validation of the token 
   LoggedIn(){

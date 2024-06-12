@@ -9,6 +9,7 @@ namespace BurnOut.Data
         Task<string> Register(RegisterDTO register);
 
         Task <ApplicationUser> GetUser(string username);
+        Task<ApplicationUser> GetUserById(string Id);
         Task<string> GetRole(ApplicationUser user);
     }
 }

@@ -17,6 +17,13 @@
           placeholder="Email" >
          <div class="invalid-feedback">Please enter your email</div>
         </div>
+        <div data-mdb-input-init class="form-outline mb-4 form-group">
+          <input type="text"  [ngClass]="{'is-invalid':registerForm.get('phoneNumber')?.errors && registerForm.get('phoneNumber')?.touched}"
+          class="form-control " 
+         formControlName="phoneNumber"
+          placeholder="phoneNumber" >
+         <div class="invalid-feedback">Please enter your phone number</div>
+        </div>
 
         <div data-mdb-input-init class="form-outline mb-4">
           <input type="text"  [ngClass]="{'is-invalid':registerForm.get('age')?.errors && registerForm.get('age')?.touched}"
@@ -103,6 +110,12 @@
     
         <!-- Submit button -->
         <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-3" (click)="register()" >Sign in</button>
+        <div *ngIf="loading" class="loader">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+      </div>
         <button type="cancel" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-3" style="margin-left: 250px;" (click)="Cancel()">Cancel</button>
       </form>
 </div>

@@ -1,1 +1,80 @@
-<p>add-event works!</p>
+<div class="modal" tabindex="-1" role="dialog" style="display: block;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Event</h5>
+          <div *ngIf="loading" class="loader">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        </div>
+        <div class="modal-body">
+          <form #CreateEventForm="ngForm" >
+            <div class="form-group">
+              <label for="eventName">Event Name</label>
+              <input type="text" id="eventName" name="eventName" class="form-control" [(ngModel)]="event.eventName"  required>
+              <div *ngIf="CreateEventForm.submitted && !event.eventName" class="text-danger">
+                Event name is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea id="description" name="description" class="form-control" [(ngModel)]="event.description" required></textarea>
+              <div *ngIf="CreateEventForm.submitted && !event.description" class="text-danger">
+                Description is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" name="date" class="form-control" [(ngModel)]="dateToShow" required>
+              <div *ngIf="CreateEventForm.submitted && !event.date" class="text-danger">
+                Date is required.
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="place">Place</label>
+                <textarea id="place" name="place" class="form-control" required [(ngModel)]="event.place"></textarea>
+                <div *ngIf="CreateEventForm.submitted && !event.place" class="text-danger">
+                    Place is required.
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 50px;">
+                <label for="eventImage">Event Image</label>
+                <input id="eventImage" name="eventImage" class="form-control"  required type="file"  #Image accept="image/*" (change)="handelDileInput($any($event).target.files)" (change)=" slected()" >
+                <div *ngIf="CreateEventForm.submitted && !event.photoUrl" class="text-danger">
+                    Photo is required.
+                </div>
+                
+                <div *ngIf="selectedImage">
+                    <img width="100" height="100" src="{{event.photoUrl}}">
+                    <button  class="close-btn"   (click)=" cancel()"><i  class="fa fa-times" aria-hidden="true" ></i></button>  
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="audiencePrice">Audience Price</label>
+                <textarea id="audiencePrice" name="audiencePrice" class="form-control" [(ngModel)]="event.audiencePrice" required></textarea>
+                <div *ngIf="CreateEventForm.submitted && !event.audiencePrice" class="text-danger">
+                    Audience Price is required.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="racerPrice">Racer Price</label>
+                <textarea id="racerPrice" name="racerPrice" class="form-control" [(ngModel)]="event.racerPrice" required></textarea>
+                <div *ngIf="CreateEventForm.submitted && !event.racerPrice" class="text-danger">
+                    Racer Price is required.
+                </div>
+              </div>
+            <!-- Add other fields as necessary -->
+            <div class="buttons-Form">
+                <button type="submit" class="btn btn-primary" (click)="onSubmit(Image)" >Save</button>
+                <button type="submit" class="btn btn-primary" (click)="Back()">Cancel</button>
+            </div>
+          
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

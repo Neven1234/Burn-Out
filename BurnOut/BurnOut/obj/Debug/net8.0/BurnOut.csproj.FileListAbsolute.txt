@@ -242,3 +242,5 @@ E:\Burn Out\Burn-Out\BurnOut\BurnOut\bin\Debug\net8.0\BurnOut.dll
 E:\Burn Out\Burn-Out\BurnOut\BurnOut\bin\Debug\net8.0\BurnOut.pdb
 E:\Burn Out\Burn-Out\BurnOut\BurnOut\obj\Debug\net8.0\BurnOut.genruntimeconfig.cache
 E:\Burn Out\Burn-Out\BurnOut\BurnOut\obj\Debug\net8.0\ref\BurnOut.dll
+E:\Burn Out\Burn-Out\BurnOut\BurnOut\bin\Debug\net8.0\Castle.Core.dll
+E:\Burn Out\Burn-Out\BurnOut\BurnOut\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll

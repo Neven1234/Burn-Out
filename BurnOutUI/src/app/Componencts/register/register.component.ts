@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from
 import { Router } from '@angular/router';
 import { RegisterUser } from '../../Models/RegisterUser';
 import { AuthService } from '../../Services/auth.service';
+import { AlertifyService } from '../../Services/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -15,13 +16,15 @@ export class RegisterComponent implements OnInit {
   user:RegisterUser={
     username: '',
     password: '',
+    phoneNumber:'',
     email: '',
     gender: '',
     age: 0,
     userID: 0,
     userRole: ''
   }
-  constructor(private router:Router,private fb:FormBuilder,private auth:AuthService){}
+  loading:boolean=false
+  constructor(private router:Router,private fb:FormBuilder,private auth:AuthService,private alerty:AlertifyService){}
   ngOnInit(): void {
     this.createRegisterForm()
   
@@ -42,11 +45,16 @@ export class RegisterComponent implements OnInit {
       this.user.userID=this.registerForm.get("userID")?.value
       this.user.carType=this.registerForm.get("carType")?.value
       this.user.license=this.registerForm.get("License")?.value
+      this.loading=true
       this.auth.Register(this.user).subscribe({
         next:()=>{
+          this.loading=false
+          this.alerty.success("account created successfullly")
           this.router.navigate(['Login'])
         },
         error:(error)=>{
+          this.loading=false
+          this.alerty.error(error)
           console.log(error)
         }
       })
@@ -62,6 +70,7 @@ export class RegisterComponent implements OnInit {
       Role:['Audience'],
       username:['',Validators.required],
       email:['',Validators.required],
+      phoneNumber:['',Validators.required],
       age:['',Validators.required],
       userID:['',Validators.required],
       carType:[''],

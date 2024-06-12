@@ -9,7 +9,7 @@ namespace BurnOut.Models
         public int Age { get; set; }
         public long UserID { get; set; }
         public string? License {get;set;}
-        public ICollection<Event>? RacerEvents { get; set; }
-        public ICollection<Event>? AudienceEvents { get; set; }
+        public virtual ICollection<Event>? RacerEvents { get; set; }
+        public virtual ICollection<Event>? AudienceEvents { get; set; }
     }
 }

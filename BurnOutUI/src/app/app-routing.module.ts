@@ -4,6 +4,8 @@ import { LoginComponent } from './Componencts/login/login.component';
 import { RegisterComponent } from './Componencts/register/register.component';
 import { EventsListComponent } from './Componencts/events-list/events-list.component';
 import { PaymentComponent } from './Componencts/payment/payment.component';
+import { authGuard } from './auth.guard';
+import { AddEventComponent } from './Componencts/add-event/add-event.component';
 
 const routes: Routes = [
   {
@@ -19,8 +21,14 @@ const routes: Routes = [
     component:EventsListComponent
   },
   {
-    path:'Pay',
-    component:PaymentComponent
+    path:'Pay/:id',
+    component:PaymentComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'Create-Event',
+    component:AddEventComponent,
+    canActivate:[authGuard]
   }
 ];
 

@@ -2,6 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Stripe, StripeCardCvcElement, StripeCardElement, StripeCardExpiryElement, StripeCardNumberElement, loadStripe } from '@stripe/stripe-js';
 import { PaymentService } from '../../Services/payment.service';
 import { Payment } from '../../Models/Payment';
+import { AlertifyService } from '../../Services/alertify.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Event } from '../../Models/Event';
+import { EventsService } from '../../Services/events.service';
 
 @Component({
   selector: 'app-payment',
@@ -19,11 +23,47 @@ export class PaymentComponent implements OnInit {
   cardCvcElement: StripeCardCvcElement | null = null;
   zipCode: string = '';
   payment:Payment={
-    amount: 1000,
-    currency: 'usd'
+    amount: 0,
+    currency: 'egp'
   }
-  constructor(private paymentService:PaymentService) {}
+  event:Event={
+    id: 0,
+    eventName: '',
+    photoUrl: '',
+    publicId:'',
+    approved:false,
+    organzerName: '',
+    description: '',
+    place: '',
+    date: new Date,
+    audiencePrice: 0,
+    racerPrice: 0,
+    reciersCount: 0,
+    audianceCount: 0,
+    organizerId: ''
+  }
+  constructor(private paymentService:PaymentService,private eventService:EventsService,
+    private alert:AlertifyService,private router:Router,private route:ActivatedRoute) {}
   ngOnInit(): void {
+    const role=localStorage.getItem('Role')
+    this.route.paramMap.subscribe({
+      next:(params)=>{
+        const id=Number(params.get('id'))
+        if(id){
+          this.eventService.GetEventById(id).subscribe({
+            next:(response)=>{
+              this.event=response
+              if(role=='Racer'){
+                this.payment.amount=this.event.racerPrice
+              }
+              else{
+                this.payment.amount=this.event.audiencePrice
+              }
+            }
+          })
+        }
+      }
+    })
     this.loadStripe();
   }
   async loadStripe() {
@@ -46,10 +86,19 @@ export class PaymentComponent implements OnInit {
     this.paymentService.initiateFawryPayment(this.payment).subscribe({
       next:async (response)=>{
         this.confirmPayment(response);
+        this.eventService.UpdateRacerOrAudincList(this.event).subscribe({
+          next:(response)=>{
+            this.alert.success(response)
+          },
+          error:(error)=>{
+            this.alert.error(error)
+          }
+        })
       },
       error:(error)=>{
         this.isProcessing = false;
         console.error('Error creating payment intent:', error);
+        this.alert.error('Failed to create payment intent. Please try again.')
         this.errorMessage = 'Failed to create payment intent. Please try again.';
       }
     })
@@ -58,6 +107,7 @@ export class PaymentComponent implements OnInit {
   async confirmPayment(clientSecret: string) {
     if (!this.stripe || !this.cardNumberElement || !this.cardExpiryElement || !this.cardCvcElement) {
       console.error('Stripe.js or card element has not been loaded properly.');
+    
       return;
     }
 
@@ -76,11 +126,15 @@ export class PaymentComponent implements OnInit {
     if (error) {
       // Handle payment failure
       console.error('Payment failed:', error.message);
+      this.alert.error('payment failed: '+error.message)
+      this.isProcessing=false
       this.errorMessage=error.message
     } else if (paymentIntent) {
       // Payment succeeded
       console.log('Payment succeeded:', paymentIntent);
-      alert('Payment succeeded!');
+      this.alert.success('Payment succeeded')
+      this.isProcessing=false
+      this.router.navigate([''])
     }
   }
 

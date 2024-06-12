@@ -18,7 +18,7 @@
       <input type="text" id="zip-code" [(ngModel)]="zipCode" name="zipCode" class="form-control" />
     </div>
     <button type="submit" [disabled]="isProcessing" class="pay-button">
-      {{ isProcessing ? 'Processing...' : 'Pay' }}
+      {{ isProcessing ? 'Processing...' : payment.amount  }}'EGP'
     </button>
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   </form>

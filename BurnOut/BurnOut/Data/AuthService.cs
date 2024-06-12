@@ -121,6 +121,14 @@ namespace BurnOut.Data
             return false;
         }
 
-       
+        public async Task<ApplicationUser> GetUserById(string Id)
+        {
+            var user=await _userManager.FindByIdAsync(Id);
+            if (user == null)
+            {
+                return null;
+            }
+            return user;
+        }
     }
 }

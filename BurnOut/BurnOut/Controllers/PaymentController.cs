@@ -1,10 +1,12 @@
 ﻿using BurnOut.Data;
 using BurnOut.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BurnOut.Controllers
 {
+ 
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentController : ControllerBase

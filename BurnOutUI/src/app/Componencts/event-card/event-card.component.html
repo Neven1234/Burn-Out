@@ -1,22 +1,41 @@
 <div class="event-card">
     <div class="event-card-header">
-        <h2>{{event.eventName}}</h2>
-        
+      <h2>{{ event.eventName }}</h2>
     </div>
     <div class="event-image">
-        <img src="{{event.photoUrl}}" alt="{{event.eventName}}">
+      <img [src]="event.photoUrl" alt="{{ event.eventName }}">
     </div>
     <div class="event-description">
-        <p>{{event.description}}</p>
-        <div class="organizer">
-            <span>Organized by:</span>
-            <p>event.organizer</p>
-        </div>
+      <p>{{ event.description }}</p>
+      <div class="organizer">
+        <span>Organized by:</span>
+        <p>{{ event.organzerName }}</p>
+      </div>
     </div>
     <div class="event-date">
-        <p>Date: {{event.date | date:'yyyy-MM-dd'}}</p>
+      <p>Date: {{ event.date | date: 'yyyy-MM-dd' }}</p>
     </div>
-    <div class="event-actions">
-        <button class="btn btn-primary">Pay</button>
+    <div class="event-actions" *ngIf="!clicked">
+      <a  (click)="detailsClick()">Details</a>
     </div>
-</div>
+    <div class="details" *ngIf="clicked">
+      <span>There are {{ event.reciersCount }} racers participating </span>
+      <span> And {{ event.audianceCount }} audience attending</span>
+      <div *ngIf="clicked">
+        <a href="#" (click)="lessClicked()">Less</a>
+      </div>
+      <div class="action-buttons" *ngIf="!Organizer && !Admin">
+        <button *ngIf="!racer" [routerLink]="['/Pay',event.id]" class="btn btn-primary">Attend {{ event.audiencePrice }} EGP</button>
+        <button *ngIf="racer" [routerLink]="['/Pay',event.id]" class="btn btn-primary">Participate {{ event.racerPrice }} EGP</button>
+      </div>
+      <div class="action-buttons" *ngIf="Organizer">
+        <button [disabled]="!Authorized" class="btn btn-primary" (click)="edit()">Edit</button>
+        <button [disabled]="!Authorized" class="btn btn-danger" (click)="delete()">Delete</button>
+      </div>
+      <div class="action-buttons" *ngIf="Admin">
+        <button [disabled]="event.approved" class="btn btn-success" (click)="approve()" >Approve</button>
+        <button  class="btn btn-danger" (click)="delete()">Delete</button>
+      </div>
+    </div>
+  </div>
+  

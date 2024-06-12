@@ -1,6 +1,7 @@
 export interface RegisterUser{
     username:string;
     password :string;
+    phoneNumber:string;
     email :string;
     gender :string;
     age :number;

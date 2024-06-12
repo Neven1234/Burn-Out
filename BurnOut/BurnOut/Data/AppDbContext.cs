@@ -16,16 +16,19 @@ namespace BurnOut.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             base.OnModelCreating(builder);
 
             SeedRoles(builder);
 
+            // Configuring one-to-many relationship between Event and Organizer
             builder.Entity<Event>()
-            .HasOne(e => e.Organizer)
-            .WithMany() 
-            .HasForeignKey(e => e.OrganizerId)
-            .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(e => e.Organizer)
+                .WithMany() // No navigation property in ApplicationUser
+                .HasForeignKey(e => e.OrganizerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
+            // Configuring many-to-many relationship between Event and Racers
             builder.Entity<Event>()
                 .HasMany(e => e.Racers)
                 .WithMany("RacerEvents")
@@ -42,6 +45,7 @@ namespace BurnOut.Data
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade));
 
+            // Configuring many-to-many relationship between Event and Audience
             builder.Entity<Event>()
                 .HasMany(e => e.Audience)
                 .WithMany("AudienceEvents")

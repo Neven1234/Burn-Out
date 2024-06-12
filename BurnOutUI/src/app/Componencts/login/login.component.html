@@ -20,6 +20,12 @@
     </div>
     <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4" (click)=" Login()" >Sign in</button>
     <div class="text-center">
+      <div *ngIf="loading" class="loader">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
       <p>Not a member? <a href="Register">Register</a></p>
     </div>
   </form>

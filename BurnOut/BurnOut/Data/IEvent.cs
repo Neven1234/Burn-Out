@@ -7,7 +7,10 @@ namespace BurnOut.Data
     {
         Task<IEnumerable<Event>> GetAllEvents(Expression<Func<Event, bool>> filter = null);
         Task<Event> GetEvent(int id);
-        Task CreateEvent(Event createdEvent);
+        Task<string> CreateEvent(Event createdEvent);
         Task <Event> GetEventByOrganizerEmail(string organizerEmail);
+        Task<string> UpdateRacerAndAudience(Event PayedEvent, string racer,ApplicationUser user);
+        Task DeleteEvent(Event eventToDelete);
+        Task<bool> SaveChanges();
     }
 }

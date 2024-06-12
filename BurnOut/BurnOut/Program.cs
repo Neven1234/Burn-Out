@@ -51,7 +51,7 @@ builder.Services.AddSwaggerGen(C =>
 
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
-    option.UseNpgsql(builder.Configuration.GetConnectionString("connSrting"));
+    option.UseLazyLoadingProxies().UseNpgsql(builder.Configuration.GetConnectionString("connSrting"));
 });
 
 builder.Services.AddCors(options =>

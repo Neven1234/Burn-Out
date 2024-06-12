@@ -27,7 +27,8 @@
     "typeRoots": [
       "node_modules/@types",
       "node_modules/@angular",
-      "node_modules/@angular/common/http"
+      "node_modules/@angular/common/http",
+      "src/app/Services/alertifytype.d.ts"
     ],
   },
   "angularCompilerOptions": {
