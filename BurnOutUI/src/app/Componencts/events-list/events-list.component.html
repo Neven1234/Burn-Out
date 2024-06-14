@@ -2,7 +2,7 @@
     <input id="search" name="search" class="form-control"  [(ngModel)]="SearchInput">
     <button class="btn btn-outline-success" type="submit" (click)="Search()" (keydown.enter)="Search()" >Search</button>
   </form>
-<div *ngIf="events.length==0">
+<div *ngIf="events.length==0 && !loading">
     <h2>No Events found</h2>
 </div>
 <div class="row" *ngIf="events.length!=0">

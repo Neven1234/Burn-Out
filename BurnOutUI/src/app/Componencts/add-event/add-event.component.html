@@ -68,7 +68,7 @@
               </div>
             <!-- Add other fields as necessary -->
             <div class="buttons-Form">
-                <button type="submit" class="btn btn-primary" (click)="onSubmit(Image)" >Save</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!CreateEventForm.valid" (click)="onSubmit(Image)" >Save</button>
                 <button type="submit" class="btn btn-primary" (click)="Back()">Cancel</button>
             </div>
           

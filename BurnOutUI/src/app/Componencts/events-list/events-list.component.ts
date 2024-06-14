@@ -3,6 +3,7 @@ import { Event } from '../../Models/Event';
 import { EventsService } from '../../Services/events.service';
 import { AlertifyService } from '../../Services/alertify.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-events-list',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class EventsListComponent implements OnInit {
   events:Event[]=[]
+  loggedIn:boolean=false
   SearchInput:string=''
   editClicked: boolean = false;
   selectedEvent: Event={
@@ -31,8 +33,9 @@ export class EventsListComponent implements OnInit {
   };
   loading:boolean=true
   role:string | null | undefined
-  constructor(private eventService:EventsService,private alertify:AlertifyService,private router:Router){}
+  constructor(private eventService:EventsService,private alertify:AlertifyService,private router:Router,private auth:AuthService){}
   ngOnInit(): void {
+    this.loggedIn=this.auth.LoggedIn()
     this.role=localStorage.getItem('Role')
     if(this.role=='Admin'){
       this.GetAllEventsForAdmin()
@@ -97,7 +100,12 @@ export class EventsListComponent implements OnInit {
             next:()=>{
               console.log('Delete photo from cloudinary')
               this.alertify.success('Event has been deleted ')
-              this.getAllEvents()
+              if(this.role=='Admin'){
+                this.GetAllEventsForAdmin()
+              }
+              else{
+                this.getAllEvents()
+              }
             },
             error:(error)=>{
               console.log(error)
@@ -117,6 +125,7 @@ export class EventsListComponent implements OnInit {
     this.eventService.EditEvent(this.selectedEvent.id,this.selectedEvent).subscribe({
       next:(response)=>{
         this.alertify.success(response.toString())
+        this.getAllEvents()
         this.closeModal()
       },
       error:(error)=>{

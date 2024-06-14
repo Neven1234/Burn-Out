@@ -15,7 +15,7 @@ export class NavComponent implements OnInit{
  
   constructor(private auth:AuthService,private alert:AlertifyService,private router:Router){}
   ngOnInit(): void {
-    this.name=this.auth.decodedToken.name;
+    // this.name=this.auth.decodedToken.name;
     if(this.auth.LoggedIn()){
       this.name=localStorage.getItem('name')
       console.log('name',localStorage.getItem('name'))
