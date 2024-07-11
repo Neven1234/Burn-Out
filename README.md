@@ -7,6 +7,7 @@ Burn out is a full stack application designed for car racing events. It offers d
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Usage](#usage)
+- [Demo](#Demo)
 ## Description
 Burn out provides a platform where car racing enthusiasts can engage with events. Users can have one of four roles: audience, racer, organizer, or admin. Each role has specific permissions and functionalities:
 
@@ -36,4 +37,14 @@ Burn out provides a platform where car racing enthusiasts can engage with events
 - Racer: Browse and participate in events.
 - Organizer: Create, edit, and delete your events.
 - Admin: Approve or delete events submitted by organizers.
+
+## Demo
+
+
+
+https://github.com/Neven1234/Burn-Out/assets/76568492/20ee6ab5-245e-4096-8a6f-72c1eeabdf97
+
+
+
+https://github.com/Neven1234/Burn-Out/assets/76568492/11ba0296-346f-4676-862c-dd1ddd3e9be0
 
